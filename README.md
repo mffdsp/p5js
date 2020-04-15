@@ -1,7 +1,9 @@
-<h1 style="color: purple;">Lista</h1>
+<h1>Lista</h1>
 
-<ul>
+<ul style="list-style: square;">
   <li>Colisão</li>
-  
-  
+  <li>Colisão</li>
+  <li>Colisão</li>
+  <li>Colisão</li>
+  <li>Colisão</li>
 </ul>
