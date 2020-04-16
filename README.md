@@ -1,3 +1,5 @@
+<div align="center">
+  
 <h1>Lista</h1>
 
 <ul style="list-style-type: circle;">
@@ -6,3 +8,5 @@
   <li>Colisão</li>
   <li>mouseMove</li>
 </ul>
+
+</div>
