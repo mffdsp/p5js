@@ -1,7 +1,5 @@
 <div align="center">
   
-<h1>Lista</h1>
-
 <ul style="list-style-type: circle;">
   <li>Criação</li>
   <li>Distancia</li>
