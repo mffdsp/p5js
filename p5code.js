@@ -1,16 +1,18 @@
 //import Bubble from './bubble';
+let freeMouse = true;
 
 function Bubble(x, y){
   this.x = x;
   this.y = y;
   this.r = 90;
   this.col = color(0,0,155)
+  this.drag = false;
 
   this.display = (main) =>{
       stroke(0);
       fill(this.col);
       if(main){
-        ellipse(mouseX, mouseY, this.r, this.r);
+        //ellipse(mouseX, mouseY, this.r, this.r);
       } else   ellipse(this.x, this.y, this.r, this.r);
     
   }
@@ -20,16 +22,21 @@ function Bubble(x, y){
       this.x = mouseX;
       this.y = 89;
     }else
-      this.x = x;
-      this.y = y;
+      this.x = this.x;
+      this.y = this.y;
   }
 
   this.collide = () =>{
+    if(mouseIsPressed){
+      this.drag = true;
+      this.x = mouseX;
+      this.y = mouseY;
+    }
+    
     this.col = color(random(255), random(255), random(255));
   }
 
 }
-
 //circle
 let x, y;
 let moveSpeed = 3;
@@ -41,27 +48,27 @@ let bn;
 let mainB;
 
 function setup() {
+
   createCanvas(canvasX, canvasY);
-  
+  background(0, 0, 255);
+
   // Starts in the middle
   x = width/2;
   y = height/2;
   
   bn = [new Bubble(90, 40), new Bubble(140, 60), new Bubble(230, 30)];
   mainB = new Bubble(mouseX, mouseY);
+  mainB.r = 2;
 }
 
+let freeM = true;
+
 function draw() {
+  background(0, 0, 255);
+  
 
-  background(255, 255, 255);
-  ellipse(mouseX,mouseY,10,10);
- 
-  // Draw a circle
-  stroke(50);
-  fill(100);
-  //ellipse(x, y, diameter, diameter); 
-
-  let hit = collidePointPoint(x,y,mouseX,mouseY)
+  stroke(255);
+  line(mouseX, mouseY, pmouseX, pmouseY);
   
   moveHandler();
   sizeHandler();
@@ -77,16 +84,32 @@ function draw() {
     let distance = int(dist(bn[i].x, bn[i].y, mouseX, mouseY)); 
 
     if(distance < (mainB.r/2 + bn[i].r/2)){
-      bn[i].collide();
+       
+      //justOne
+      freeM = true;
+      for(let j = 0; j < bn.length; j++){
+          if(i != j){
+            if(bn[j].drag){
+              freeM = false;
+            }
+          }
+      }
+      if(freeM){
+        bn[i].collide();
+      }
+      //justOne
+
     }
 
   }
   
-  //calcCollide(bn);
-
-
 }
 
+function mouseReleased(fxn){
+  bn.map((x) => {
+    x.drag = false;
+  })
+}
 function loguinho(){
   console.table([x,y, d])
     moveSpeed = +document.getElementById("value").value;
